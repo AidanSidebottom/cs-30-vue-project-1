@@ -8,9 +8,10 @@
 //sub-component must be imported and then registered in "components" below
 import MyHeader from "./components/MyHeader.vue";
 import HelloWorld from "./components/HelloWorld.vue";
+import board from "./components/board.vue";
 
 export default {
-	components: { MyHeader, HelloWorld },
+	components: { MyHeader, HelloWorld, board, },
 };
 </script>
 

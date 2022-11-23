@@ -1,5 +1,5 @@
 <template>
-	<div class="header">This is the Header</div>
+	<div class="header">Aidan's Chess</div>
 </template>
 
 <!--This component is just HTML and CSS, 
