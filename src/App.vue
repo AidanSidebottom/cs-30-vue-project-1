@@ -2,6 +2,7 @@
 	<div class="container">
 		<MyHeader />
 		<HelloWorld />
+		<board />
 	</div>
 </template>
 <script>
@@ -11,7 +12,7 @@ import HelloWorld from "./components/HelloWorld.vue";
 import board from "./components/board.vue";
 
 export default {
-	components: { MyHeader, HelloWorld, board, },
+	components: { MyHeader, HelloWorld, board, }
 };
 </script>
 
