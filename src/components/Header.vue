@@ -1,5 +1,5 @@
 <template>
-	<div class="header">Aidan's Chess</div>
+	<div class="header">Chess</div>
 </template>
 
 <!--This component is just HTML and CSS, 
@@ -7,9 +7,12 @@ so no <script> section is needed-->
 
 <style scoped>
 .header {
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	font-size: xx-large;
-	font-family: sans-serif;
+	font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 	font-weight: bold;
+	text-align: center;
+	padding: 10px;
+	
 }
 </style>

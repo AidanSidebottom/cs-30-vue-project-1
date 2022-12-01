@@ -1,24 +1,22 @@
 <template>
 	<div class="container">
-		<MyHeader />
-		<HelloWorld />
-		<board />
+		<Header />
+		<Board />
 	</div>
 </template>
 <script>
 //sub-component must be imported and then registered in "components" below
-import MyHeader from "./components/MyHeader.vue";
-import HelloWorld from "./components/HelloWorld.vue";
-import board from "./components/board.vue";
+import Header from "./components/Header.vue"
+import Board from "./components/Board.vue";
 
 export default {
-	components: { MyHeader, HelloWorld, board, }
+	components: { Header,Board, }
 };
 </script>
 
 <style scoped>
 body {
-	background-color: rgb(243, 255, 255);
+	background-color: rgb(50, 82, 82);
 }
 .container {
 	margin: 8px;
