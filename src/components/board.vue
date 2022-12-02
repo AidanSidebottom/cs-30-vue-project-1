@@ -18,7 +18,7 @@ const board = ref([
 <div class=player>
   The current player Is {{player}}
 </div>
-  <main class="Board">
+  <main class="board">
     <div 
       v-for="(row, x) in board"
       :key="x"
@@ -39,15 +39,20 @@ const board = ref([
 
 
 <style scoped>
+.board{
+  
+}
 .cell{
+  display:inline-block;
+  vertical-align:middle;
+  background-color:lightgreen;
   border: white;
   border-radius: 10px;
-  height:20px;
-  width:20px;
-  background-color: black;
+  height:10px;
+  width:10px;
+  background-color: rgb(126, 51, 51);
+  
   padding:10px;
-  align-items: center;
-  justify-content: center;
 }
 .player{
   padding: 10px;
