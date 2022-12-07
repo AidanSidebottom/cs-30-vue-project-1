@@ -1,8 +1,8 @@
 <script setup>
 
-import{ref,computed} from 'vue'
+import{ref} from 'vue'
 const player = ref('white')
-const color = ref('white')
+const color = ref('white'? 'black' :'white')
 const movesList = ref([])
 const board = ref([
   ['c','h','b','k','q','b','h','c'],
@@ -15,17 +15,22 @@ const board = ref([
   ['c','h','b','k','q','b','h','c'],
 ])
 
+const checker = ()=>{
+
+}
+
 const turn = (x,y)=>{
 
   //if(board.value[x][y] =='') return
 
   player.value = player.value === 'white'? 'black' :'white'
   
-  const choosePeice = board.value[0][2];
+  const choosePeice = board.value[x][y];
   //movesList.push(x,y)
   
   
-  board.value[x][y] = choosePeice 
+  board.value[x][y] = ''
+   
   
   return
 
@@ -52,15 +57,17 @@ const resetGame = ()=>{
     The current player Is {{player}}
   </div>
     <main class="board">
-      <div 
+      <div
+        
         v-for="(row, x) in board"
         :key="x"
       >
         <div 
           v-for="(cell, y) in row"
           :key="y"
-          class = "white"
           @click="turn(x,y)"
+          v-bind:class="color"
+          
 
         >
           <div>
