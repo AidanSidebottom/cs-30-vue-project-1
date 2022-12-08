@@ -2,8 +2,8 @@
 
 import{ref} from 'vue'
 const player = ref('white')
-const color = ref('white'? 'black' :'white')
-const movesList = ref([])
+const movesList = ref(["startingPos",])
+
 const board = ref([
   ['c','h','b','k','q','b','h','c'],
   ['p','p','p','p','p','p','p','p'],
@@ -15,26 +15,31 @@ const board = ref([
   ['c','h','b','k','q','b','h','c'],
 ])
 
-const checker = ()=>{
-
+const checker = (x,y)=>{
+if(x+y===0||x+y===2||x+y===4||x+y===6||x+y===8||x+y===10
+||x+y==12||x+y===14)
+//For some reason checking if the number was even did not seem to work
+{
+  return 'white'
+  }
+  else{
+  return 'black'
+  }
 }
 
+const holding =false;
 const turn = (x,y)=>{
-
-  //if(board.value[x][y] =='') return
-
+  //if(!holding){
   player.value = player.value === 'white'? 'black' :'white'
-  
   const choosePeice = board.value[x][y];
-  //movesList.push(x,y)
-  
-  
-  board.value[x][y] = ''
-   
-  
+  holding = true;
+  board.value[x][y] = '';
   return
-
+  //}
+  //movesList=movesList.push("a move")
+  return
 }
+
 const resetGame = ()=>{
   board.value =
   [
@@ -56,6 +61,8 @@ const resetGame = ()=>{
   <div class=player>
     The current player Is {{player}}
   </div>
+  
+
     <main class="board">
       <div
         
@@ -66,7 +73,7 @@ const resetGame = ()=>{
           v-for="(cell, y) in row"
           :key="y"
           @click="turn(x,y)"
-          v-bind:class="color"
+          v-bind:class="checker(x,y)"
           
 
         >
@@ -77,13 +84,13 @@ const resetGame = ()=>{
       </div>
     </main>
 
-      <button @click="resetGame()">
-        Reset game 
-      </button>
-      <div>
-        Moves : 
-        {{movesList}}
-      </div>
+  <button @click="resetGame()">
+    Reset game 
+  </button>
+  <div>
+    Moves : 
+    {{movesList}}
+  </div>
   
     
 </template>
@@ -102,7 +109,7 @@ const resetGame = ()=>{
   border-radius: 3px;
   height:20px;
   width:20px;
-  background-color: rgb(81, 158, 115);
+  background-color: rgb(127, 160, 142);
   padding:10px;
 }
 .black{
@@ -112,7 +119,7 @@ const resetGame = ()=>{
   border-radius: 3px;
   height:20px;
   width:20px;
-  background-color: rgb(3, 17, 9);
+  background-color: rgb(12, 117, 61);
   padding:10px;
 }
 .player{
