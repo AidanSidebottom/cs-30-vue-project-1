@@ -1,18 +1,20 @@
 <script setup>
 
-import{ref} from 'vue'
+import{ref, computed} from 'vue'
 const player = ref('white')
 const movesList = ref(["startingPos",])
+let holding = true;
+let choosePeice;
 
 const board = ref([
-  ['c','h','b','k','q','b','h','c'],
-  ['p','p','p','p','p','p','p','p'],
+  ['bc','bh','bb','bk','bq','bb','bh','bc'],
+  ['bp','bp','bp','bp','bp','bp','bp','bp'],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
-  ['p','p','p','p','p','p','p','p'],
-  ['c','h','b','k','q','b','h','c'],
+  ['wp','wp','wp','wp','wp','wp','wp','wp'],
+  ['wc','wh','wb','wk','wq','wb','wh','wc'],
 ])
 
 const checker = (x,y)=>{
@@ -27,31 +29,36 @@ if(x+y===0||x+y===2||x+y===4||x+y===6||x+y===8||x+y===10
   }
 }
 
-const holding =false;
+
+
 const turn = (x,y)=>{
-  //if(!holding){
+  if(holding===true){
   player.value = player.value === 'white'? 'black' :'white'
-  const choosePeice = board.value[x][y];
-  holding = true;
+  choosePeice = board.value[x][y];
+  holding=false
   board.value[x][y] = '';
-  return
-  //}
-  //movesList=movesList.push("a move")
-  return
+  }else{
+  board.value[x][y]=choosePeice
+  holding=true;
+  }
+  //movesList.push("a move")
+  return 
 }
 
 const resetGame = ()=>{
   board.value =
   [
-  ['c','h','b','k','q','b','h','c'],
-  ['p','p','p','p','p','p','p','p'],
+  ['bc','bh','bb','bk','bq','bb','bh','bc'],
+  ['bp','bp','bp','bp','bp','bp','bp','bp'],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
-  ['p','p','p','p','p','p','p','p'],
-  ['c','h','b','k','q','b','h','c'],
-]
+  ['wp','wp','wp','wp','wp','wp','wp','wp'],
+  ['wc','wh','wb','wk','wq','wb','wh','wc'],
+];
+player.value='white';
+holding=false;
 }
 
 
@@ -61,8 +68,6 @@ const resetGame = ()=>{
   <div class=player>
     The current player Is {{player}}
   </div>
-  
-
     <main class="board">
       <div
         
