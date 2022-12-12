@@ -1,9 +1,11 @@
 <script setup>
 
 import{ref, computed} from 'vue'
+//import assets from '../src/assets'
+
 const player = ref('white')
-const movesList = ref(["startingPos",])
-let holding = true;
+const movesList = ref([])
+let holding = false;
 let choosePeice;
 
 const board = ref([
@@ -18,9 +20,7 @@ const board = ref([
 ])
 
 const checker = (x,y)=>{
-if(x+y===0||x+y===2||x+y===4||x+y===6||x+y===8||x+y===10
-||x+y==12||x+y===14)
-//For some reason checking if the number was even did not seem to work
+if((x+y)%2==0)
 {
   return 'white'
   }
@@ -32,33 +32,35 @@ if(x+y===0||x+y===2||x+y===4||x+y===6||x+y===8||x+y===10
 
 
 const turn = (x,y)=>{
-  if(holding===true){
+  if(holding===false){
   player.value = player.value === 'white'? 'black' :'white'
   choosePeice = board.value[x][y];
-  holding=false
+  holding=true
   board.value[x][y] = '';
   }else{
   board.value[x][y]=choosePeice
-  holding=true;
+  holding=false;
+  movesList.value.push(choosePeice+' '+x+' '+y)
   }
-  //movesList.push("a move")
   return 
 }
 
 const resetGame = ()=>{
   board.value =
   [
-  ['bc','bh','bb','bk','bq','bb','bh','bc'],
+  ['br','bh','bb','bk','bq','bb','bh','br'],
   ['bp','bp','bp','bp','bp','bp','bp','bp'],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['wp','wp','wp','wp','wp','wp','wp','wp'],
-  ['wc','wh','wb','wk','wq','wb','wh','wc'],
+  ['wr','wh','wb','wk','wq','wb','wh','wr'],
 ];
 player.value='white';
 holding=false;
+movesList.value = []
+choosePeice=[]
 }
 
 
@@ -92,9 +94,9 @@ holding=false;
   <button @click="resetGame()">
     Reset game 
   </button>
+
   <div>
-    Moves : 
-    {{movesList}}
+    Moves: {{movesList}}
   </div>
   
     

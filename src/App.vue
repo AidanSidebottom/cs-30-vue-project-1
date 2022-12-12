@@ -7,7 +7,7 @@
 <script>
 //sub-component must be imported and then registered in "components" below
 import Header from "./components/Header.vue"
-import Board from "./components/Board.vue";
+import Board from "./components/Board.vue"
 
 export default {
 	components: { Header,Board, }
