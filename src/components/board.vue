@@ -16,46 +16,59 @@ const board = ref([
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['wp','wp','wp','wp','wp','wp','wp','wp'],
-  ['wc','wh','wb','wk','wq','wb','wh','wc'],
+  ['wc','wh','wb','wq','wk','wb','wh','wc'],
 ])
 
 const checker = (x,y)=>{
-if((x+y)%2==0)
-{
-  return 'white'
+if((x+y)%2==0){
+    return 'white'
   }
   else{
-  return 'black'
+    return 'black'
   }
 }
 
-
+const peices = (x,y)=>{
+if(board.value[x][y].charAt(0)=='b'){
+    return 'blackPcs'
+  }else{
+    return 'whitePcs'
+  }
+}
 
 const turn = (x,y)=>{
   if(holding===false){
-  player.value = player.value === 'white'? 'black' :'white'
-  choosePeice = board.value[x][y];
-  holding=true
-  board.value[x][y] = '';
+    choosePeice = board.value[x][y];
+    board.value[x][y] = '';
+    holding=true
   }else{
-  board.value[x][y]=choosePeice
-  holding=false;
-  movesList.value.push(choosePeice+' '+x+' '+y)
+    //if(moveSaftey(x,y,choosePeice)===true){
+    player.value = player.value === 'white'? 'black' :'white'
+    board.value[x][y]=choosePeice
+    holding=false;
+    movesList.value.push(choosePeice+' '+x+' '+y)
+    //}
   }
   return 
 }
 
+// const moveSafety = (x,y,peice)=>{
+//   if(peice){
+//     return true;
+//   }
+// }
+
 const resetGame = ()=>{
   board.value =
   [
-  ['br','bh','bb','bk','bq','bb','bh','br'],
+  ['br','bh','bb','bq','bk','bb','bh','br'],
   ['bp','bp','bp','bp','bp','bp','bp','bp'],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['wp','wp','wp','wp','wp','wp','wp','wp'],
-  ['wr','wh','wb','wk','wq','wb','wh','wr'],
+  ['wr','wh','wb','wq','wk','wb','wh','wr'],
 ];
 player.value='white';
 holding=false;
@@ -84,7 +97,9 @@ choosePeice=[]
           
 
         >
-          <div>
+          <div
+           v-bind:class="peices(x,y)"
+           >
           {{board[x][y]}}
           </div>
         </div>
@@ -134,11 +149,18 @@ choosePeice=[]
   font-size: 20px;
   text-align: center;
 }
+.whitePcs{
+  color: white
+}
+.blackPcs{
+  color: black
+}
 .white:hover{
   background-color: rgb(180, 76, 16);
 }
 .black:hover{
   background-color: rgb(180, 76, 16);
 }
+
 
 </style>
