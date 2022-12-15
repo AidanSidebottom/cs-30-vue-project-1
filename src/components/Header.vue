@@ -13,6 +13,10 @@ so no <script> section is needed-->
 	font-weight: bold;
 	text-align: center;
 	padding: 10px;
+	border-radius: 1px;
+	border-block: 10px;
+	border: 10px;
+	border-color: black;
 	
 }
 </style>

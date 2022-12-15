@@ -7,19 +7,33 @@ const player = ref('white')
 const movesList = ref([])
 let holding = false;
 let choosePeice;
+const br = {name:"Black Rook",color:"blackPcs",symbol:"♜"}
+const bh = {name:"Black Horse",color:"blackPcs",symbol:"♞"}
+const bb = {name:"Black Bishop",color:"blackPcs",symbol:"♝"}
+const bk = {name:"Black King",color:"blackPcs",symbol:"♚"}
+const bq = {name:"Black Queen",color:"blackPcs",symbol:"♛"}
+const bp = {name:"Black Pawn",color:"blackPcs",symbol:"♟︎"}
+
+const wr = {name:"White Rook",color:"whitePcs",symbol:"♖"}
+const wh = {name:"White Horse",color:"whitePcs",symbol:"♘"}
+const wb = {name:"White Bishop",color:"whitePcs",symbol:"♗"}
+const wk = {name:"White King",color:"whitePcs",symbol:"♔"}
+const wq = {name:"White Queen",color:"whitePcs",symbol:"♕"}
+const wp = {name:"White Pawn",color:"whitePcs",symbol:"♙"}
+
 
 const board = ref([
-  ['bc','bh','bb','bk','bq','bb','bh','bc'],
-  ['bp','bp','bp','bp','bp','bp','bp','bp'],
+  [br,bh,bb,bq,bk,bb,bh,br],
+  [bp,bp,bp,bp,bp,bp,bp,bp],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
-  ['wp','wp','wp','wp','wp','wp','wp','wp'],
-  ['wc','wh','wb','wq','wk','wb','wh','wc'],
+  [wp,wp,wp,wp,wp,wp,wp,wp],
+  [wr,wh,wb,wq,wk,wb,wh,wr],
 ])
+const tiles = (x,y)=>{
 
-const checker = (x,y)=>{
 if((x+y)%2==0){
     return 'white'
   }
@@ -27,14 +41,16 @@ if((x+y)%2==0){
     return 'black'
   }
 }
-
-const peices = (x,y)=>{
-if(board.value[x][y].charAt(0)=='b'){
-    return 'blackPcs'
-  }else{
-    return 'whitePcs'
-  }
-}
+// const legalMoves = (x,y) =>{
+//   if(choosePeice.name === "Black Rook"){
+//      if (x===x&&y!=y||y===y&&x!=x){
+//        return true
+//      }else{
+//        alert('invalid move');
+//        return false
+//      }
+//   }
+// }
 
 const turn = (x,y)=>{
   if(holding===false){
@@ -42,33 +58,25 @@ const turn = (x,y)=>{
     board.value[x][y] = '';
     holding=true
   }else{
-    //if(moveSaftey(x,y,choosePeice)===true){
     player.value = player.value === 'white'? 'black' :'white'
     board.value[x][y]=choosePeice
     holding=false;
-    movesList.value.push(choosePeice+' '+x+' '+y)
-    //}
+    movesList.value.push(board.value[x][y].name+' '+x+' '+y)
   }
   return 
 }
 
-// const moveSafety = (x,y,peice)=>{
-//   if(peice){
-//     return true;
-//   }
-// }
-
 const resetGame = ()=>{
   board.value =
   [
-  ['br','bh','bb','bq','bk','bb','bh','br'],
-  ['bp','bp','bp','bp','bp','bp','bp','bp'],
+  [br,bh,bb,bq,bk,bb,bh,br],
+  [bp,bp,bp,bp,bp,bp,bp,bp],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
   ['','','','','','','',''],
-  ['wp','wp','wp','wp','wp','wp','wp','wp'],
-  ['wr','wh','wb','wq','wk','wb','wh','wr'],
+  [wp,wp,wp,wp,wp,wp,wp,wp],
+  [wr,wh,wb,wq,wk,wb,wh,wr],
 ];
 player.value='white';
 holding=false;
@@ -93,14 +101,14 @@ choosePeice=[]
           v-for="(cell, y) in row"
           :key="y"
           @click="turn(x,y)"
-          v-bind:class="checker(x,y)"
+          v-bind:class="tiles(x,y)"
           
 
         >
           <div
-           v-bind:class="peices(x,y)"
+           v-bind:class="board[x][y].color"
            >
-          {{board[x][y]}}
+          {{board[x][y].symbol}}
           </div>
         </div>
       </div>
