@@ -35,35 +35,58 @@ const board = ref([
 const tiles = (x,y)=>{
 
 if((x+y)%2==0){
-    return 'white'
+    return 'white';
   }
   else{
-    return 'black'
+    return 'black';
   }
+}
+const validPeice = (x,y) =>{
+if(board.value[x][y].name===undefined){
+   alert("Choose A Peice")
+   return false;
+  }
+  return true;
 }
 
 const legalMoves = (x,y) =>{
-  if(choosePeice.name === undefined){
-       alert('invalid move');
-       return false
-     }
+if(board.value[x][y].color===choosePeice.color){
+  alert("you cannot capture your own peices")
+  return false;
   }
-
+// if(choosePeice.name==="Black Rook"){
+//   for (let i = 0; i < 7; i++) {
+//   if(choosePeice[x][y]===board.value[x+i][y]||choosePeice[x][y]===board.value[x][y+i]){
+//     alert("nope")
+//     return true;
+//     }
+    
+//   }
+//   return false;
+// }
+  return true;
+}
 
 const turn = (x,y)=>{
   if(holding===false){
     choosePeice = board.value[x][y];
-    legalMoves(x,y)
-    board.value[x][y] = '';
+    if(validPeice(x,y)){
+    board.value[x][y] = ''; 
     holding=true
+    }
+    return
   }else{
-    player.value = player.value === 'white'? 'black' :'white'
+    if(legalMoves(x,y)){
     board.value[x][y]=choosePeice
     holding=false;
     movesList.value.push(board.value[x][y].name+' '+x+' '+y)
+    player.value = player.value === 'white'? 'black' :'white'
+    }
+    return
+    }
   }
-  return 
-}=
+ 
+
 
 const resetGame = ()=>{
   board.value =
