@@ -41,20 +41,19 @@ if((x+y)%2==0){
     return 'black'
   }
 }
-// const legalMoves = (x,y) =>{
-//   if(choosePeice.name === "Black Rook"){
-//      if (x===x&&y!=y||y===y&&x!=x){
-//        return true
-//      }else{
-//        alert('invalid move');
-//        return false
-//      }
-//   }
-// }
+
+const legalMoves = (x,y) =>{
+  if(choosePeice.name === undefined){
+       alert('invalid move');
+       return false
+     }
+  }
+
 
 const turn = (x,y)=>{
   if(holding===false){
     choosePeice = board.value[x][y];
+    legalMoves(x,y)
     board.value[x][y] = '';
     holding=true
   }else{
@@ -64,7 +63,7 @@ const turn = (x,y)=>{
     movesList.value.push(board.value[x][y].name+' '+x+' '+y)
   }
   return 
-}
+}=
 
 const resetGame = ()=>{
   board.value =
