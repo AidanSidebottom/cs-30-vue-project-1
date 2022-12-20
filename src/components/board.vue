@@ -7,6 +7,8 @@ const player = ref('white')
 const movesList = ref([])
 let holding = false;
 let choosePeice;
+let from;
+let to;
 const br = {name:"Black Rook",color:"blackPcs",symbol:"♜"}
 const bh = {name:"Black Horse",color:"blackPcs",symbol:"♞"}
 const bb = {name:"Black Bishop",color:"blackPcs",symbol:"♝"}
@@ -46,6 +48,14 @@ if(board.value[x][y].name===undefined){
    alert("Choose A Peice")
    return false;
   }
+  if(board.value[x][y].color==="blackPcs"&& player.value==="white"){
+    alert("White's turn")
+    return false;
+  }
+  if(board.value[x][y].color==="whitePcs"&& player.value==="black"){
+    alert("Black's turn")
+    return false;
+  }
   return true;
 }
 
@@ -53,29 +63,40 @@ const legalMoves = (x,y) =>{
 if(board.value[x][y].color===choosePeice.color){
   alert("you cannot capture your own peices")
   return false;
-  }
-// if(choosePeice.name==="Black Rook"){
-//   for (let i = 0; i < 7; i++) {
-//   if(choosePeice[x][y]===board.value[x+i][y]||choosePeice[x][y]===board.value[x][y+i]){
-//     alert("nope")
-//     return true;
-//     }
-    
-//   }
-//   return false;
-// }
-  return true;
 }
+if(choosePeice.name==="Black Rook"||choosePeice.name==="White Rook"){ 
+  if(from[0]!=to[0]&&from[1]!=to[1]){
+    alert("invalid move")
+    return false;
+    }
+}
+if(choosePeice.name==="Black Pawn"){
+ if((to[0]-from[0])>=3){
+   alert("invalid move")
+   return false;
+  }
+}
+if(choosePeice.name==="White Pawn"){
+ if((from[0]-to[0])>=3){
+   alert("invalid move")
+   return false;
+  }
+}
+return true;
+}
+
 
 const turn = (x,y)=>{
   if(holding===false){
     choosePeice = board.value[x][y];
+    from = [x,y]
     if(validPeice(x,y)){
     board.value[x][y] = ''; 
     holding=true
     }
     return
   }else{
+    to = [x,y]
     if(legalMoves(x,y)){
     board.value[x][y]=choosePeice
     holding=false;
