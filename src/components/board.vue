@@ -173,7 +173,7 @@ choosePeice=[]
 <style scoped>
 .board{
   margin: auto;
-  width: 50%;
+  width: 100%;
 }
 .white{
   display:inline-block;
