@@ -60,12 +60,20 @@ if(board.value[x][y].name===undefined){
 }
 
 const legalMoves = (x,y) =>{
+  let originX = from[0]
+  let originY = from[1]
+  let translationX = to[0]
+  let translationY  = to[1]
 if(board.value[x][y].color===choosePeice.color){
   alert("you cannot capture your own peices")
   return false;
 }
+if(originX===translationX&&originY===translationY){
+  alert("make a move")
+  return false;
+}
 if(choosePeice.name==="Black Rook"||choosePeice.name==="White Rook"){ 
-  if(from[0]!=to[0]&&from[1]!=to[1]){
+  if(originX!=translationX &&from[1]!=to[1]){
     alert("invalid move")
     return false;
     }
