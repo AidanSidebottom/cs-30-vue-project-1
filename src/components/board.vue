@@ -73,11 +73,11 @@ if(originX===translationX&&originY===translationY){
   return false;
 }
 if(choosePeice.name==="Black Rook"||choosePeice.name==="White Rook"){ 
-  if(originX!=translationX &&from[1]!=to[1]){
+  if(originX!=translationX &&originY!=translationY){
     alert("invalid move")
     return false;
     }
-}
+}eee
 if(choosePeice.name==="Black Pawn"){
  if((to[0]-from[0])>=3){
    alert("invalid move")
