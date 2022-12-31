@@ -1,5 +1,5 @@
 <template>
-	<div class="header">Chess 2</div>
+	<div class="header">Chess</div>
 </template>
 
 <!--This component is just HTML and CSS, 
