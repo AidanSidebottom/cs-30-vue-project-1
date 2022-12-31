@@ -79,13 +79,13 @@ if(choosePeice.name==="Black Rook"||choosePeice.name==="White Rook"){
     }
 }
 if(choosePeice.name==="Black Pawn"){
- if((to[0]-from[0])>=3){
+ if((translationX-originX)>=3){
    alert("invalid move")
    return false;
   }
 }
 if(choosePeice.name==="White Pawn"){
- if((from[0]-to[0])>=3){
+ if((originX-translationX)>=3){
    alert("invalid move")
    return false;
   }
